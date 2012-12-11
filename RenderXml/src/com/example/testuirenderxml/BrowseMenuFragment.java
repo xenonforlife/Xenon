@@ -32,6 +32,7 @@ import ae.javax.xml.bind.JAXBContext;
 import ae.javax.xml.bind.JAXBElement;
 import ae.javax.xml.bind.JAXBException;
 import ae.javax.xml.bind.Unmarshaller;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -76,6 +77,7 @@ public class BrowseMenuFragment extends Fragment {
 	private List<JAXBElement<?>> items;
 	private JAXBContext jc;
 	private Unmarshaller unmarshaller;
+	private View v;
 	
 	public void generateFirstMenu() throws JAXBException
 	{
@@ -114,7 +116,9 @@ public class BrowseMenuFragment extends Fragment {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
+        RuntimeInlineAnnotationReader.cachePackageAnnotation(WindowT.class.getPackage(), new XmlSchemaMine("http://fdi.org/2010/client"));
+              
 	}
 
 	@Override
@@ -127,11 +131,9 @@ public class BrowseMenuFragment extends Fragment {
         if (savedInstanceState != null) {
             //mCurrentPosition = savedInstanceState.getInt(ARG_POSITION);
         }
-
-        // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.menu_fragment_layout, container, false);
+    	v= inflater.inflate(R.layout.menu_fragment_layout, null);
         listView = (ListView)v.findViewById(R.id.mainListView);
-        RuntimeInlineAnnotationReader.cachePackageAnnotation(WindowT.class.getPackage(), new XmlSchemaMine("http://fdi.org/2010/client"));
+        
         try {
 			generateFirstMenu();
 		}  
@@ -139,7 +141,6 @@ public class BrowseMenuFragment extends Fragment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
         return v;
     }
 	
@@ -149,7 +150,7 @@ public class BrowseMenuFragment extends Fragment {
 
         // When in two-pane layout, set the listview to highlight the selected list item
         // (We do this during onStart because at the point the listview is available.)
-        if (getFragmentManager().findFragmentById(R.id.rendered_fragment) != null) {
+        if (getActivity().getSupportFragmentManager().findFragmentById(R.id.rendered_fragment) != null) {
             listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         }
     }

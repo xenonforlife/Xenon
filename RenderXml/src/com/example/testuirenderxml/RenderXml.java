@@ -34,10 +34,14 @@ public class RenderXml extends FragmentActivity
             firstFragment.setArguments(getIntent().getExtras());
 
             // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, firstFragment).commit();
             
          }
+        else
+        {
+        	//BrowseMenuFragment firstFragment=(BrowseMenuFragment) getSupportFragmentManager().findFragmentById(R.id.browse_menu_fragment);
+        }
+       
     }
 
     @Override

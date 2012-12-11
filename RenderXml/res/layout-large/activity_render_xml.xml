@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment android:name="com.example.testuirenderxml.BrowseMenuFragment"
+    <android.support.v4.app.fragment android:name="com.example.testuirenderxml.BrowseMenuFragment"
               android:id="@+id/browse_menu_fragment"
               android:layout_weight="1"
               android:layout_width="0dp"
               android:layout_height="match_parent" />
 
-    <fragment android:name="com.example.testuirenderxml.RenderedFragment"
+    <android.support.v4.app.fragment android:name="com.example.testuirenderxml.RenderedFragment"
               android:id="@+id/rendered_fragment"
               android:layout_weight="2"
               android:layout_width="0dp"
